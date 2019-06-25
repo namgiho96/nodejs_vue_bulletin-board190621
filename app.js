@@ -16,6 +16,8 @@ if(!cfg){
 
 var app = express();
 
+if(cfg.web.cors) app.use(require('cors')());
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -28,6 +30,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'fe', 'dist')));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.set('jwt-secret', cfg.web.secret_key);
 app.use('/api', require('./routes/api'));
 
 // catch 404 and forward to error handler

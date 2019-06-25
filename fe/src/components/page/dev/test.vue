@@ -7,6 +7,12 @@
                          :rows="3"
                          :max-rows="6">
         </b-form-textarea>
+         <b-form-input v-model="txtPostName" class="mb-3"
+                  type="text"
+                  placeholder="회사명"></b-form-input>
+         <b-form-input v-model="txtPostRmk" class="mb-3"
+                        type="text"
+                        placeholder="비고"></b-form-input>
         <b-button @click="sendPost"
                   variant="primary">전송</b-button>
       </b-card>
@@ -51,20 +57,50 @@ export default {
       txtGet: '',
       txtPut: '',
       txtDelete: '',
+      txtPostName: '',
+      txtPostRmk: '',
     };
   },
   methods: {
     sendPost() {
-      this.txtPost = 'pppp';
+      const body = {
+        name: this.txtPostName,
+        rmk: this.txtPostRmk,
+      }
+      this.$axios.post('http://localhost:3000/api/data/company',body)
+        .then((res) => {
+          this.txtPost = JSON.stringify(res.data);
+        })
+        .catch((err) => {
+          this.txtPost = JSON.stringify(err);
+        })
     },
     sendGet() {
-      this.txtGet = 'ggggg';
+          this.$axios.get('http://localhost:3000/api/data/company')
+        .then((res) => {
+          this.txtGet = JSON.stringify(res.data);
+        })
+        .catch((err) => {
+          this.txtGet = JSON.stringify(err);
+        })
     },
     sendPut() {
-      this.txtPut = 'uuuuu';
+          this.$axios.put('http://localhost:3000/api/data/company')
+        .then((res) => {
+          this.txtPut = JSON.stringify(res.data);
+        })
+        .catch((err) => {
+          this.txtPut = JSON.stringify(err);
+        })
     },
     sendDelete() {
-      this.txtDelete = 'ddddd';
+          this.$axios.delete('http://localhost:3000/api/data/company')
+        .then((res) => {
+          this.txtDelete = JSON.stringify(res.data);
+        })
+        .catch((err) => {
+          this.txtDelete = JSON.stringify(err);
+        })
     },
   },
 };
