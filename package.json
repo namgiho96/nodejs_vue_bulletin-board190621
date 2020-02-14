@@ -21,6 +21,6 @@
     "sweetalert": "^2.1.2",
     "vue-awesome": "^3.5.4",
     "vue2-google-maps": "^0.10.6",
-    "yarn": "^1.16.0"
+    "yarn": "^1.22.0"
   }
 }
